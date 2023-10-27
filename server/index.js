@@ -116,11 +116,11 @@ app.post('/product', async (req, res) => {
             message: e.message
         })
     }
-  });
+});
 
 // Get product 
-app.get('/product/:id', async (req, res)=>{
-    const {id }= req.params;
+app.get('/product/:id', async (req, res) => {
+    const { id } = req.params;
 
     const product = await Product.findById(id);
     res.json({
@@ -132,24 +132,22 @@ app.get('/product/:id', async (req, res)=>{
 
 // Delete product
 app.delete('/product/:id', async (req, res) => {
-    const {id } = req.params;
-    await Product.deleteOne({ id: id });
+    const { id } = req.params;
+    await Product.deleteOne({ _id: id });
 
     res.json({
-        success: true,
-        data: {},
+        success: true,    
         message: `Successfully deleted product with id ${id}`,
     })
 });
 
 // Put product
-app.put('/product/:id', async (req, res)=>{
-    const {id} = req.params;
+app.put('/product/:id', async (req, res) => {
+    const { id } = req.params;
 
-    const {name, description, price, image, category, brand} = req.body;
+    const { name, description, price, image, category, brand } = req.body;
 
-    const product = await Product.updateOne(
-        {id: id},
+    await Product.updateOne({ _id: id },
         {
             $set: {
                 name: name,
@@ -159,20 +157,34 @@ app.put('/product/:id', async (req, res)=>{
                 category: category,
                 brand: brand
             }
-        }
-    );
+        });
 
     const updatedProduct = await Product.findById(id);
     res.json({
         success: true,
         data: updatedProduct,
         message: "Product updated successfully."
-    })   
+    })
 });
 
+// GET /products/search?q=Sam
+app.get("/products/search", async (req, res) => {
+    const { q } = req.query;
+
+    const products = await Product.find({ name: { $regex: q, $options: "i" } });
+
+    res.json({
+        success:true,
+        data: products,
+        message: "Products fetched successfully"
+    });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port : ${PORT}`);
     connectDB();
 });
+
+
+
