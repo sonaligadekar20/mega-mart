@@ -88,12 +88,12 @@ app.get('/products', async (req, res) => {
         data: products,
         message: "Successfully featched all products."
     })
-})
+});
 
-// post
+// Post product
 app.post('/product', async (req, res) => {
     const { name, description, price, image, category, brand } = req.body;
-  
+
     const product = new Product({
         name: name,
         description: description,
@@ -101,17 +101,76 @@ app.post('/product', async (req, res) => {
         image: image,
         category: category,
         brand: brand
-    })
-  
-    const saveProduct = await product.save();
+    });
+    try {
+        const saveProduct = await product.save();
+        res.json({
+            success: true,
+            data: saveProduct,
+            message: "Successfully added new product"
+        })
+    }
+    catch (e) {
+        res.json({
+            success: false,
+            message: e.message
+        })
+    }
+  });
+
+// Get product 
+app.get('/product/:id', async (req, res)=>{
+    const {id }= req.params;
+
+    const product = await Product.findById(id);
     res.json({
         success: true,
-        data: saveProduct,
-        message: "Successfully added new product"
+        data: product,
+        message: "Get details of products."
     })
-  
-  });
-  
+});
+
+// Delete product
+app.delete('/product/:id', async (req, res) => {
+    const {id } = req.params;
+    await Product.deleteOne({ id: id });
+
+    res.json({
+        success: true,
+        data: {},
+        message: `Successfully deleted product with id ${id}`,
+    })
+});
+
+// Put product
+app.put('/product/:id', async (req, res)=>{
+    const {id} = req.params;
+
+    const {name, description, price, image, category, brand} = req.body;
+
+    const product = await Product.updateOne(
+        {id: id},
+        {
+            $set: {
+                name: name,
+                description: description,
+                price: price,
+                image: image,
+                category: category,
+                brand: brand
+            }
+        }
+    );
+
+    const updatedProduct = await Product.findById(id);
+    res.json({
+        success: true,
+        data: updatedProduct,
+        message: "Product updated successfully."
+    })   
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port : ${PORT}`);
