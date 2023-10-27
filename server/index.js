@@ -90,7 +90,28 @@ app.get('/products', async (req, res) => {
     })
 })
 
-
+// post
+app.post('/product', async (req, res) => {
+    const { name, description, price, image, category, brand } = req.body;
+  
+    const product = new Product({
+        name: name,
+        description: description,
+        price: price,
+        image: image,
+        category: category,
+        brand: brand
+    })
+  
+    const saveProduct = await product.save();
+    res.json({
+        success: true,
+        data: saveProduct,
+        message: "Successfully added new product"
+    })
+  
+  });
+  
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port : ${PORT}`);
