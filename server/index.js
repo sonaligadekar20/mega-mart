@@ -221,7 +221,7 @@ app.get('/order/:id', async(req, res)=>{
         data: order,
         message: "Order featched successfully"
     }) 
-})
+});
 
 // GET/orders
 app.get('/orders', async(req, res)=>{
@@ -232,9 +232,39 @@ app.get('/orders', async(req, res)=>{
         data:orders,
         message: "Orders featched successfully"
     })
-})
+});
 
-
+// GET/orders/user/:id
+app.get('/orders/user/:id', async(req, res)=>{
+    const {id} = req.params;
+     
+    const orders = await Order.find({user:id}).populate("user product");
+  
+    res.json({
+        success: true,
+        data:orders,
+        message: "Orders featched successfully" 
+    })
+  });
+  
+  // PATCH/order/status/:id
+  app.patch('/order/status/:id', async(req, res)=>{
+    const {id} = req.params;
+  
+    const {status} = req.body;
+    
+    await Order.updateOne ({_id: id},
+        {$set: {status:status}});
+  
+    const updatedProduct = await Order.findOne({_id: id})
+  
+    res.json({
+        success: true,
+        data: updatedProduct,
+        message: "Order status updated successfully." 
+    });
+  });
+  
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port : ${PORT}`);
