@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import User from './models/User.js';
 import Product from "./models/Product.js";
+import Order from "./models/Order.js";
 dotenv.config();
 
 const app = express();
@@ -79,7 +80,7 @@ app.post("/login", async (req, res) => {
 
 //   Get products
 
-const products = [];
+// const products = [];
 app.get('/products', async (req, res) => {
     const products = await Product.find();
 
@@ -118,7 +119,7 @@ app.post('/product', async (req, res) => {
     }
 });
 
-// Get product 
+// Get product by id
 app.get('/product/:id', async (req, res) => {
     const { id } = req.params;
 
@@ -130,7 +131,7 @@ app.get('/product/:id', async (req, res) => {
     })
 });
 
-// Delete product
+// Delete product by id
 app.delete('/product/:id', async (req, res) => {
     const { id } = req.params;
     await Product.deleteOne({ _id: id });
@@ -179,6 +180,60 @@ app.get("/products/search", async (req, res) => {
         message: "Products fetched successfully"
     });
 });
+
+// Post/order
+app.post('/order', async(req, res)=>{
+    const {user, product, quantity, shippingAddress, delivaryCharges} = req.body;
+
+    const order = new Order({
+        user:user,
+        product:product,
+        quantity: quantity,
+        shippingAddress: shippingAddress,
+        delivaryCharges:delivaryCharges    
+    });
+
+    try{
+        const savedOrder = await order.save();
+        res.json({
+            success:true,
+            data:savedOrder,
+            message: " Ordered created successfully "
+        })
+    }
+    catch(e){
+        res.json({
+            success: false,
+            message: e.message
+        })
+    }
+})
+
+// GET/order/:id
+app.get('/order/:id', async(req, res)=>{
+    const {id } = req.params;
+
+    const order = await Order.findById(id).populate("user product");
+    order.user.password= undefined;
+
+    res.json({
+        success:true,
+        data: order,
+        message: "Order featched successfully"
+    }) 
+})
+
+// GET/orders
+app.get('/orders', async(req, res)=>{
+    const orders = await Order.find();
+
+    res.json({
+        success: true,
+        data:orders,
+        message: "Orders featched successfully"
+    })
+})
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

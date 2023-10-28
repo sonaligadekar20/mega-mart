@@ -1,0 +1,35 @@
+{
+    "success": true,
+    "data": {
+        "_id": "653cd9c72e69588a21612df6",
+        "user": {
+            "_id": "653a4e639675a38998f9c6a5",
+            "name": "sonali",
+            "email": "sonali123@gmail.com",
+            "password": "sonali123",
+            "mobile": " 56276762726726",
+            "address": "pune",
+            "gender": "female ",
+            "__v": 0
+        },
+        "product": {
+            "_id": "653b90ca88010e911e366ad1",
+            "name": "Himalaya HIMALA PURIFYING NEEM FACE WASH ",
+            "description": "Applied For: Anti-ageing, Anti-acne & Pimples ",
+            "price": 120,
+            "image": "https://m.media-amazon.com/images/I/61k8xLmdORL._SY879_.jpg ",
+            "category": "skin care ",
+            "brand": "Himalaya",
+            "createdAt": "2023-10-27T10:28:26.823Z",
+            "updatedAt": "2023-10-27T16:37:10.102Z",
+            "__v": 0
+        },
+        "quantity": "1 ",
+        "shippingAddress": "404, Lotus multispecialist hospital ",
+        "delivaryCharges": 100,
+        "createdAt": "2023-10-28T09:52:07.343Z",
+        "updatedAt": "2023-10-28T09:52:07.343Z",
+        "__v": 0
+    },
+    "message": "Order featched successfully"
+}
