@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import axios  from 'axios';
+import {Link} from "react-router-dom";
 import "./Login.css";
 
 function Login () {
@@ -19,7 +20,7 @@ function Login () {
         alert(response?.data?.message)
 
         if(response?.data?.success){
-            alert(response?.data?.success)
+            localStorage.setItem("user", JSON.stringify(response?.data?.data))
             window.location.href = "/";
         }
     };
@@ -53,7 +54,11 @@ function Login () {
                 </div>
 
                 <button type="button" className='btn login-btn' onClick={login}>Login</button>
-               
+
+                <p  className='text-right'>
+                <Link to="/signup">Create a new account?</Link>
+                </p>
+  
             </form>
         </div>
     )

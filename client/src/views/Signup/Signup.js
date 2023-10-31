@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import "./Signup.css"
+import "./Signup.css";
+import {Link} from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
+
 function Signup(){
     const [name, setName]  = useState('');
     const [email, setEmail] = useState('');
@@ -14,6 +17,24 @@ function Signup(){
             alert("Name is required");
             return;
         }
+
+        if(!email){
+            alert("Email is required");
+            return;
+        }
+
+        if(!password){
+            alert("Password is required");
+            return;
+        }
+        if(!mobile){
+            alert("Mobile is required");
+            return;
+        }
+        if(!address){
+            alert("Address is required");
+            return;
+        }
         const response = await axios.post("/signup",{
             name:name,
             email:email,
@@ -21,18 +42,17 @@ function Signup(){
             mobile: mobile,
             address:address,
             gender:gender
-
         })
         
         alert(response?.data?.message);
         if(response?.data?.success){
             window.location.href = "/login";
-
         }
     };
 
     return(
         <div>
+             <Navbar/>
             <form className="signup-form">
                 <h1 class="text-center">Signup Form</h1>
 
@@ -49,7 +69,7 @@ function Signup(){
                 </div>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input type="text"
+                    <input type="email"
                     placeholder="Enter your email"
                     id="email"
                     className="form-control"
@@ -117,6 +137,11 @@ function Signup(){
                 </div>
 
                 <button type="button" className="btn signup-btn" onClick={signup}>Signup</button>
+
+                <p className="text-right">
+                    <Link to="/login">Already have an account?</Link>
+
+                </p>
 
             </form>
         </div>

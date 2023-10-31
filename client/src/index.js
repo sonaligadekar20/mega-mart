@@ -4,7 +4,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from './views/Signup/Signup';
 import Login from './views/Login/Login';
 
-const router = createBrowserRouter([
+
+const router = createBrowserRouter([{
+  path: '/',
+  element:<h1>Home</h1>
+},
 {
   path: '/signup',
   element: <Signup />
