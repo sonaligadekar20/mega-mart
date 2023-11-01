@@ -25,6 +25,21 @@ function Home () {
     return(
         <div>
             <Navbar/>
+            <div className='main-container'>
+          {
+            products?.map(( product, index)=>{
+                const {name, description, price, image} = product;
+                return(
+                    <ProductCard key={index}
+                     name={name}
+                     description={description} 
+                     price={price}
+                     image={image}
+                     />
+                )
+            })
+           }
+          </div>
           
         </div>
     )
