@@ -1,6 +1,6 @@
 .product-card{
-    width: 300px;
-    margin: 10px 20px;
+    width: 275px;
+    margin: 40px 20px;
     padding: 15px 30px;
     border: 1px solid #e0e0e0;
     background-color: white;
@@ -9,25 +9,27 @@
   }
   .product-card-image{
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: contain;
     background-color: white;
   }
   .product-card-name{
     font-size: 20px;
-    font-weight: 400;
-    overflow-x: hidden;
+    font-weight: 500;
+    /* overflow-x: hidden;
     height: 25px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
   }
   .product-card-price{
     font-size: 22px;
     font-weight: 500;  
+    color: #198d8d;
   }
-  
-  
-  
+  .product-button{
+    width: 100%;
+  }
+    

@@ -9,7 +9,7 @@ function ProductCard( {name, description, price, image}) {
             <h2 className='product-card-name'>{name} </h2>
             <p className='product-card-description'>{description}</p>
             <p className='product-card-price'> ₹ {price}</p>
-            <button className='btn'>Buy Now</button>
+            <button className='btn product-button'>Buy Now</button>
             </div>
     )
 }

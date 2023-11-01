@@ -20,7 +20,7 @@ import {Link} from "react-router-dom"
                 <Link to="/orders" className="navbar-link">My Orders</Link>
             </div>
             <div>
-                Hello,{user.name || "User!"}
+                <span className='navbar-username'>Hello, {user.name || "User!"}</span>
                 {
                     user?.name ?
                     (<span className='navbar-logout' onClick={()=>{
