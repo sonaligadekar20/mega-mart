@@ -3,11 +3,12 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from './views/Signup/Signup';
 import Login from './views/Login/Login';
-
+import MyOrders from './views/MyOrders/MyOrders';
+import Home from './views/Home/Home';
 
 const router = createBrowserRouter([{
   path: '/',
-  element:<h1>Home</h1>
+  element:<Home/>
 },
 {
   path: '/signup',
@@ -16,9 +17,13 @@ const router = createBrowserRouter([{
 {
   path: '/login',
   element: <Login/>
+},
+{
+  path: '/orders',
+  element: <MyOrders/>
 }
 
-])
+]);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

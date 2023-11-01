@@ -1,6 +1,7 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import axios  from 'axios';
 import {Link} from "react-router-dom";
+import Navbar from '../../components/Navbar/Navbar';
 import "./Login.css";
 
 function Login () {
@@ -23,10 +24,20 @@ function Login () {
             localStorage.setItem("user", JSON.stringify(response?.data?.data))
             window.location.href = "/";
         }
-    };
+    }
+
+    useEffect(()=>{
+        const storageUser = JSON.parse(localStorage.getItem("user") || '{}');
+
+        if(storageUser?.email){
+            alert("You are already logged in!");
+            window.location.href = "/";
+        }
+    },[])
     
     return(
         <div>
+            <Navbar/>
             <form className='login-form'>
                 <h1 className='text-center'>Login Form</h1>
 
