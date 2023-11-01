@@ -32,5 +32,28 @@
     margin: 0 10px;
     cursor: pointer;
 }
-
+@media screen  and (max-width: 768px){
+    .navbar{
+        display: flex;
+        flex-direction: column;
+        align-items:start; 
+        /* padding: 30px; */
+    }
+    .navbar-container{
+        display: flex;
+        flex-direction: column;
+        margin-left: -10px;          
+    }
+    .navbar-link{
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        margin: 10px 10px;
+    }
+    .navbar-link:hover{
+        padding: 0;
+    }
+  }
+  
+  
     
