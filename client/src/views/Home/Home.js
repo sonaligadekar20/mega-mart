@@ -28,13 +28,14 @@ function Home () {
             <div className='main-container'>
           {
             products?.map(( product, index)=>{
-                const {name, description, price, image} = product;
+                const {_id, name, description, price, image} = product;
                 return(
                     <ProductCard key={index}
                      name={name}
                      description={description} 
                      price={price}
                      image={image}
+                     id={_id}
                      />
                 )
             })

@@ -30,6 +30,8 @@
     color: #198d8d;
   }
   .product-button{
-    width: 100%;
+    display: block;
+    margin:  10px auto;
+    text-decoration: none;
   }
     

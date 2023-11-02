@@ -3,6 +3,7 @@ import axios  from 'axios';
 import {Link} from "react-router-dom";
 import Navbar from '../../components/Navbar/Navbar';
 import "./Login.css";
+import Img1 from './login.png'
 
 function Login () {
     const [email, setEmail] = useState('');
@@ -38,7 +39,13 @@ function Login () {
     return(
         <div>
             <Navbar/>
-            <form className='login-form'>
+
+            <div>
+                <div>
+                 <img  src={Img1} alt='img1' className='img-2'/>
+                </div>
+                <div>
+                <form className='login-form'>
                 <h1 className='text-center'>Login Form</h1>
 
                 <div>
@@ -71,6 +78,9 @@ function Login () {
                 </p>
   
             </form>
+                </div>
+            </div>
+          
         </div>
     )
 }
