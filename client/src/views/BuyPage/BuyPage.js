@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./BuyPage.css";
 import { useParams } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
 
 function BuyPage() {
+    const { id } = useParams();
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
-    const [charges, setCharges] = useState('50')
-    const { id } = useParams();
+    const [delivaryCharges, setdelivaryCharges] = useState('50');
+    const [shippingAddress, setshippingAddress]= useState('');
 
     const increaseQuantity=()=>{
         setQuantity(quantity + 1)
@@ -27,14 +29,34 @@ function BuyPage() {
         setProduct(response?.data?.data)
     }
 
+    const placeOrder = async ()=>{
+
+        const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+        const orderDetails ={
+            user: currentUser._id,
+            product: id,
+            quantity: quantity,
+            delivaryCharges:delivaryCharges,
+            shippingAddress: shippingAddress
+        }
+
+        const response = await axios.post('/order', orderDetails);
+        alert(response?.data?.message);
+        if(response?.data?.success){
+            window.location.href = '/orders';
+        }
+    }
+
     useEffect(() => {
         loadProduct()
     }, [])
 
     return (
-        <div className='product-container'>
+        <div>
+             <Navbar/>
+            <div className='product-container'>
             <div>
-                <img src={product.image} />
+                <img src={product.image} className='buy-product-image' />
             </div>
             <div>
                 <h2>₹ {product.price}</h2>
@@ -43,32 +65,51 @@ function BuyPage() {
 
                 <div>
                     <p className='text-quantity'>Quantity:</p>
-                    <span className='dec-quantity' onClick={decreaseQuantity}> ➖ </span>
-                    <span className='quantity-number'> {quantity} </span>
-                    <span className='inc-quantity' onClick={increaseQuantity}> ➕</span>
+                    <span className='btn-dec-quantity' onClick={decreaseQuantity}> ➖ </span>
+                    <span className='product-quantity-text'> {quantity} </span>
+                    <span className='btn-inc-quantity' onClick={increaseQuantity}> ➕</span>
                 </div>
                 <div>
                     <input type = "radio"
-                    name="charges"
-                    className='charges'
-                    checked={charges === "50"}
+                    id = "50"
+                    name="delivaryCharges"
+                    className='delivary-charges'
+                    checked={delivaryCharges === "50"}
                     onClick={()=>{
-                        setCharges("50")
+                        setdelivaryCharges("50")
                     }}/>
                     <label htmlFor='50'>Regular delivary</label>
 
                     <input type = "radio"
-                    name="charges"
-                    className='charges'
-                    checked={charges === "100"}
+                    id = "100"
+                    name="delivary-charges"
+                    className='delivaryCharges'
+
+                    checked={delivaryCharges === "100"}
                     onClick={()=>{
-                        setCharges("100")
+                        setdelivaryCharges("100")
                     }}/>
                     <label htmlFor= '100'>Fastest delivary</label>
                 </div>
+                <div>
+                    <input type = "text" 
+                    placeholder='Enter Shipping Address'
+                    className='input-shipping-address'
+                    value={shippingAddress}
+                    onChange={(e) =>{
+                        setshippingAddress(e.target.value)
+                    }}
+                    />
+                </div>
+                <button type="button" className='btn btn-place-order'
+                onClick={placeOrder}> Place Order</button>
+
 
             </div>
         </div>
+
+        </div>
+        
     )
 }
 export default BuyPage
