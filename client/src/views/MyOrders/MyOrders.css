@@ -1,0 +1,11 @@
+.orders-container{
+    padding: 10px 50px;
+}
+.order-status{
+    position:absolute;
+    top:10px;
+    right: 10px;
+    font-size: 20px;
+    color:#198d8d
+
+}

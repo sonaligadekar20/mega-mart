@@ -62,7 +62,7 @@ function BuyPage() {
                 <h2>₹ {product.price}</h2>
                 <h2>{product.name}</h2>
                 <p>{product.description}</p>
-
+                
                 <div>
                     <p className='text-quantity'>Quantity:</p>
                     <span className='btn-dec-quantity' onClick={decreaseQuantity}> ➖ </span>
@@ -90,6 +90,8 @@ function BuyPage() {
                         setdelivaryCharges("100")
                     }}/>
                     <label htmlFor= '100'>Fastest delivary</label>
+
+                    <h3>Delivary Charges: {delivaryCharges}</h3>
                 </div>
                 <div>
                     <input type = "text" 
@@ -100,9 +102,11 @@ function BuyPage() {
                         setshippingAddress(e.target.value)
                     }}
                     />
-                </div>
-                <button type="button" className='btn btn-place-order'
+                    <button type="button" className='btn btn-place-order'
                 onClick={placeOrder}> Place Order</button>
+                   
+                </div>
+                
 
 
             </div>
