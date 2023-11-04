@@ -103,12 +103,10 @@ function BuyPage() {
                     }}
                     />
                     <button type="button" className='btn btn-place-order'
-                onClick={placeOrder}> Place Order</button>
+                    onClick={placeOrder}> Place Order</button>
                    
                 </div>
                 
-
-
             </div>
         </div>
 

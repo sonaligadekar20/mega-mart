@@ -1,11 +1,37 @@
 .orders-container{
     padding: 10px 50px;
 }
+.product-img{
+    height: 100px;
+    width: 100px;
+    margin-right: 50px;
+    
+}
+.order-card{
+    display: flex;
+    background-size: cover;
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
 .order-status{
     position:absolute;
     top:10px;
     right: 10px;
     font-size: 20px;
-    color:#198d8d
-
+    padding: 4px 10px;
+    border-radius: 8px;
+    color:#fff;
+}
+.badge-danger{
+    background-color: red;
+}
+.badge-warning{
+    background-color: orange;
+}
+.badge-success{
+    background-color: green;
 }

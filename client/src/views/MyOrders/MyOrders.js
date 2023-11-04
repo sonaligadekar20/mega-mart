@@ -3,7 +3,13 @@ import "./MyOrders.css";
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import Navbar from '../../components/Navbar/Navbar';
+import {Link} from 'react-router-dom'
 
+const STATUS_BADGE_COLOR_MAP = {
+    "pending": "badge-danger",
+    "shipped": "badge-warning",
+    "delivered": "badge-success"
+}
 function MyOrders(){
     const [user, setUser] = useState('');
 
@@ -42,12 +48,17 @@ function MyOrders(){
             <div className='orders-container'>
                 {
                     orders?.map((order, index)=>{
-                        const {product, quantity, status, delivaryCharges,} = order;
+                        const {image,product, quantity, status, delivaryCharges,} = order;
                         return(
                             <div className='order-card'> 
-                                <h3>{product.name}</h3>
+                            <div>
+                            <img src= {product.image} className='product-img'/>
+                             </div>  
+                             <div>
+                                <Link to={`/buy/${product._id}`}>{product.name}</Link>
                                 <h4>₹{product.price} x {quantity} = ₹{product.price * quantity}</h4>
-                                <span className="order-status">{status}</span>
+                                <span className={`order-status ${STATUS_BADGE_COLOR_MAP[status]}`}>{status}</span>
+                                </div>
                                 </div>
                         )
 
