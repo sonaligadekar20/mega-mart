@@ -13,7 +13,7 @@ import {Link} from "react-router-dom"
     return(
         <div className='navbar'>
             <Link to ='/' className="navbar-band"> Mega Mart🏬  </Link>
-
+            
             <div className='navbar-container'>
                 <Link to="/login" className="navbar-link">Login</Link>
                 <Link to="/signup" className="navbar-link">Signup</Link>

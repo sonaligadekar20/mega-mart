@@ -18,7 +18,6 @@ const connectDB = async () => {
 }
 
 // POST signup
-
 app.post("/signup", async (req, res) => {
     const { name, email, password, mobile, address, gender } = req.body;
 
@@ -278,8 +277,6 @@ app.get('/orders/user/:id', async(req, res)=>{
   
     const updatedProduct = await Order.findOne({_id: id});
 
-
-  
     res.json({
         success: true,
         data: updatedProduct,

@@ -92,6 +92,7 @@ function BuyPage() {
                     <label htmlFor= '100'>Fastest delivary</label>
 
                     <h3>Delivary Charges: {delivaryCharges}</h3>
+                    <h3>Total Pay Amount:  ₹{(product.price * quantity)+delivaryCharges}</h3>
                 </div>
                 <div>
                     <input type = "text" 
