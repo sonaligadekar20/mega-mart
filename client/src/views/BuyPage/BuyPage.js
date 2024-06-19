@@ -4,30 +4,38 @@ import "./BuyPage.css";
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 
-function BuyPage() {
-    const { id } = useParams();
+function BuyPage() { 
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
-    const [delivaryCharges, setdelivaryCharges] = useState('50');
+    const [delivaryCharges, setdelivaryCharges] = useState(50);
     const [shippingAddress, setshippingAddress]= useState('');
+
+    const { id } = useParams();
+    const loadProduct = async () => {
+        try{
+            const response = await axios.get(`/product/${id}`)
+            setProduct(response?.data?.data)
+        }
+        catch(e){
+            console.log(e.message);
+    }
+}
+
+    useEffect(() => {
+        loadProduct()
+    }, [id]);
 
     const increaseQuantity=()=>{
         setQuantity(quantity + 1)
     }
     const decreaseQuantity =()=> {
         if (quantity === 1) {
-            return
+            return;
         }
         setQuantity(quantity - 1)
     }
 
-    const loadProduct = async () => {
-        if (!id) {
-            return
-        }
-        const response = await axios.get(`/product/${id}`)
-        setProduct(response?.data?.data)
-    }
+  
 
     const placeOrder = async ()=>{
 
@@ -47,21 +55,19 @@ function BuyPage() {
         }
     }
 
-    useEffect(() => {
-        loadProduct()
-    }, [])
+   
 
     return (
         <div>
              <Navbar/>
             <div className='product-container'>
             <div>
-                <img src={product.image} className='buy-product-image' />
+                <img src={product.image} className='buy-product-image' alt={product.name} />
             </div>
             <div>
-                <h2>₹ {product.price}</h2>
+                <h2>₹ {product?.price}</h2>
                 <h2>{product.name}</h2>
-                <p>{product.description}</p>
+                <p>{product?.description}</p>
                 
                 <div>
                     <p className='text-quantity'>Quantity:</p>
@@ -74,10 +80,10 @@ function BuyPage() {
                     id = "50"
                     name="delivaryCharges"
                     className='delivary-charges'
-                    checked={delivaryCharges === "50"}
-                    onClick={()=>{
-                        setdelivaryCharges("50")
-                    }}/>
+                    checked={delivaryCharges === 50}
+                    onChange={() => 
+                        setdelivaryCharges(50)
+                    }/>
                     <label htmlFor='50'>Regular delivary</label>
 
                     <input type = "radio"
@@ -85,10 +91,10 @@ function BuyPage() {
                     name="delivary-charges"
                     className='delivaryCharges'
 
-                    checked={delivaryCharges === "100"}
-                    onClick={()=>{
-                        setdelivaryCharges("100")
-                    }}/>
+                    checked={delivaryCharges === 100}
+                    onChange={()=>
+                        setdelivaryCharges(100)
+                    }/>
                     <label htmlFor= '100'>Fastest delivary</label>
 
                     <h3>Delivary Charges: {delivaryCharges}</h3>
@@ -116,3 +122,6 @@ function BuyPage() {
     )
 }
 export default BuyPage
+
+
+
