@@ -48,15 +48,18 @@ function MyOrders(){
             <div className='orders-container'>
                 {
                     orders?.map((order, index)=>{
-                        const {image,product, quantity, status, delivaryCharges,} = order;
+                        const {image, product, shippingAddress, quantity, status, delivaryCharges} = order;
                         return(
                             <div className='order-card'> 
                             <div>
                             <img src= {product.image} className='product-img'/>
+                            <h4 > Qty: {quantity}</h4>
                              </div>  
                              <div>
                                 <Link to={`/buy/${product._id}`}>{product.name}</Link>
-                                <h4>₹{product.price} x {quantity} = ₹{product.price * quantity}</h4>
+                                <p>Address: {shippingAddress} </p>
+                                <span> Price: {product.price} </span> <span>Delivary: {delivaryCharges}</span>
+                                <h4>Total Pay Amount  = ₹ {(product.price * quantity)+delivaryCharges}</h4>
                                 <span className={`order-status ${STATUS_BADGE_COLOR_MAP[status]}`}>{status}</span>
                                 </div>
                                 </div>
