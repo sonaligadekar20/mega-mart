@@ -1,11 +1,15 @@
 .orders-container{
     padding: 10px 50px;
+    /* display: flex; */
+    /* flex-direction: row; */
 }
 .product-img{
     height: 100px;
     width: 100px;
-    margin-right: 50px;
-    
+    margin-right: 50px;  
+}
+.qty{
+     margin-left: 20px;
 }
 .order-card{
     display: flex;
@@ -34,4 +38,7 @@
 }
 .badge-success{
     background-color: green;
+}
+.delivarycharge{
+    margin-left: 15px;
 }
