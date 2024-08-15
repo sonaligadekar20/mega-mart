@@ -34,7 +34,7 @@ function Signup(){
             alert("Address is required");
             return;
         }
-        const response = await axios.post("/signup",{
+        const response = await axios.post("/api/signup",{
             name:name,
             email:email,
             password:password,

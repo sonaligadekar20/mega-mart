@@ -14,7 +14,7 @@ function Login () {
             alert("Email is required");
             return;
         }
-        const response = await axios.post("/login",{
+        const response = await axios.post("/api/login",{
             email : email,
             password: password
         })
