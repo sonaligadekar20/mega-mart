@@ -48,7 +48,7 @@ function BuyPage() {
             shippingAddress: shippingAddress
         }
 
-        const response = await axios.post('/order', orderDetails);
+        const response = await axios.post('/api/order', orderDetails);
         alert(response?.data?.message);
         if(response?.data?.success){
             window.location.href = '/orders';

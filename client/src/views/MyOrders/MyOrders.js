@@ -21,7 +21,7 @@ function MyOrders(){
         if(!userId){
             return;
         }
-        const response = await axios.get(`/orders/user/${userId}`)
+        const response = await axios.get(`/api/orders/user/${userId}`)
         setOrders(response?.data?.data);
     }
 
