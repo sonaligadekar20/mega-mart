@@ -14,7 +14,7 @@ function Home () {
             return;
         }
 
-        const response = await axios.get(`products/search?q=${search}`);
+        const response = await axios.get(`/api/products/search?q=${search}`);
         setProducts(response?.data?.data);
     }
     useEffect(()=>{
@@ -22,7 +22,7 @@ function Home () {
     })
     const loadProducts = async ()=>{
        try{
-        const response = await axios.get("/products");
+        const response = await axios.get("/api/products");
         setProducts(response?.data?.data);
        }
        catch(err){

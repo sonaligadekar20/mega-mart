@@ -13,7 +13,7 @@ function BuyPage() {
     const { id } = useParams();
     const loadProduct = async () => {
         try{
-            const response = await axios.get(`/product/${id}`)
+            const response = await axios.get(`/api/product/${id}`)
             setProduct(response?.data?.data)
         }
         catch(e){
